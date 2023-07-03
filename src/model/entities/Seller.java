@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Seller implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String nome;
+	private String name;
 	private String email;
 	private Date birthdate;
 	private Double baseSalary;
@@ -20,9 +20,9 @@ public class Seller implements Serializable{
 	}
 
 
-	public Seller(Integer id, String nome, String email, Date birthdate, Double baseSalary, Department department) {
+	public Seller(Integer id, String name, String email, Date birthdate, Double baseSalary, Department department) {
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 		this.email = email;
 		this.birthdate = birthdate;
 		this.baseSalary = baseSalary;
@@ -35,8 +35,8 @@ public class Seller implements Serializable{
 	}
 
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
 
@@ -65,8 +65,8 @@ public class Seller implements Serializable{
 	}
 
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
@@ -111,7 +111,7 @@ public class Seller implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Seller [id=" + id + ", nome=" + nome + ", email=" + email + ", birthdate=" + birthdate + ", baseSalary="
+		return "Seller [id=" + id + ", name=" + name + ", email=" + email + ", birthdate=" + birthdate + ", baseSalary="
 				+ baseSalary + ", department=" + department + "]";
 	}
 	
