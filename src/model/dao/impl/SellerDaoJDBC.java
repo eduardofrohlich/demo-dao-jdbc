@@ -48,18 +48,9 @@ public class SellerDaoJDBC implements SellerDao{
 			
 			st.setInt(1, id); //o primeiro "?" recebe o id do parametro da funcao
 			rs = st.executeQuery();
-			if(rs.next()) {
-				Department dep = new Department();
-				dep.setId(rs.getInt("DepartmentId")); //nome da coluna no BD
-				dep.setName(rs.getString("DepName")); //nome da coluna do departamento no BD
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setBirthdate(rs.getDate("BirthDate"));
-				obj.setBaseSalary(rs.getDouble("BaseSalary"));
-				obj.setDepartment(dep); //ASSOCIANDO OBJETO DEPARTMENT COM SELLER
-				
+			if(rs.next()) {	
+				Department dep = instantiateDepartment(rs);
+				Seller obj = instantiateSeller(rs, dep);
 				return obj;
 			}
 			return null; //se nao tem next (next falso), nao tem vendedor com o id informado
@@ -73,6 +64,24 @@ public class SellerDaoJDBC implements SellerDao{
 			DB.closeResultSet(rs);
 		}
 		
+	}
+
+	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setBirthdate(rs.getDate("BirthDate"));
+		obj.setBaseSalary(rs.getDouble("BaseSalary"));
+		obj.setDepartment(dep); //ASSOCIANDO OBJETO DEPARTMENT COM SELLER
+		return obj;
+	}
+
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dep = new Department();
+		dep.setId(rs.getInt("DepartmentId")); //nome da coluna no BD
+		dep.setName(rs.getString("DepName")); //nome da coluna do departamento no BD
+		return dep;
 	}
 
 	@Override
