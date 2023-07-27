@@ -44,7 +44,9 @@ public class SellerDaoJDBC implements SellerDao{
 				ResultSet rs = st.getGeneratedKeys();
 				if(rs.next()) {
 					int id = rs.getInt(1); 
+					obj.setId(id);
 				}
+				DB.closeResultSet(rs);
 			} 
 			else {
 				throw new DbException("Unexpected error! No rows affected!");
@@ -157,7 +159,7 @@ public class SellerDaoJDBC implements SellerDao{
 		try {
 			st = conn.prepareStatement("SELECT seller.*, department.Name AS DepName FROM seller \n"
 					+ "INNER JOIN department ON department.Id = seller.DepartmentId \n"
-					+ "ORDER BY NAME");
+					+ "ORDER BY Name");
 			
 			rs = st.executeQuery();
 			
